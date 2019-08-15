@@ -8,5 +8,5 @@ fs.writeFileSync(outputPath, '')
 let files = fs.readdirSync('./src/benchmarks');
 files.forEach((filename) => {
     let benchmark = require('./benchmarks/' + filename).benchmark
-    benchmark('./src/benchmarks/' + filename)
+    benchmark('https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/' + filename)
 })

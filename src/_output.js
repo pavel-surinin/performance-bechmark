@@ -20,7 +20,7 @@ function Logger(header, n, example, filename) {
     this.events = []
     writeLn('## ' + header);
     writeLn();
-    writeLn(`Benckmark file name _${filename}_`);
+    writeLn(`Benckmark file [_${filename}_](${filename})`);
     writeLn();
     writeLn('Test data with `' + n + '` instances');
     writeLn();
