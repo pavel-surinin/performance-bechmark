@@ -20,3 +20,8 @@ files.forEach((filename) => {
     let benchmark = require('./benchmarks/' + filename).benchmark
     benchmark('https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/' + filename)
 })
+
+fs.copyFileSync(
+    outputPath,
+    './history/benchmark-' + packagejson.dependencies['declarative-js'] + '.md'
+)
