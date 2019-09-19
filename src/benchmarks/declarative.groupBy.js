@@ -7,7 +7,6 @@ var groupBy = djs.Reducer.groupBy
 var Map = djs.Reducer.Map
 var linq = require('linq')
 var Logger = require('../_output').Logger
-var groupArray = require('group-array')
 
 let benchmark = (filename) => {
     let array = []

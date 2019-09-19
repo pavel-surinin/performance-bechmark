@@ -1,8 +1,18 @@
+let packagejson = require('../package.json')
 let fs = require('fs')
 let outputPath = require('./_output').OUTPUT_FILE_NAME
 
+let header = `
+## Versions: 
+ - node.js: _10.15.3_ 
+ - declarative-js: _${packagejson.dependencies['declarative-js']}_
+ - lodash: _${packagejson.dependencies['lodash']}_
+ - linq: _${packagejson.dependencies['linq']}_
+
+`
+
 // clear output file
-fs.writeFileSync(outputPath, '')
+fs.writeFileSync(outputPath, header)
 
 // generate benchmarks
 let files = fs.readdirSync('./src/benchmarks');
