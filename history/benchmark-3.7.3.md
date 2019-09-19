@@ -15,25 +15,6 @@ Instance example:
 ```javascript
 {
   "index": 0,
-  "id": "149a789c-be28-4743-bf6a-cf8bd898a4ff",
-  "luckyNumber": "77id"
-}
-## Versions: 
- - node.js: _10.15.3_ 
- - declarative-js: _3.7.3_
- - lodash: _4.17.15_
- - linq: _3.2.0_
-
-## Reduer.groupBy
-
-Benckmark file [_https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.groupBy.js_](https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.groupBy.js)
-
-Test data with `100000` instances
-
-Instance example: 
-```javascript
-{
-  "index": 0,
   "id": "b8b14f61-82c5-4006-9989-2d78aaebc167",
   "luckyNumber": "85id"
 }
