@@ -4,6 +4,7 @@ var djs = require('declarative-js')
 var _ = require('lodash')
 var toBe = djs.toBe
 var linq = require('linq')
+var arrayUniq = require('array-uniq')
 var Logger = require('../_output').Logger
 
 
@@ -26,6 +27,9 @@ let benchmark = (filename) => {
     })
     suite.add('[lodash] _.uniq  | ', function () {
         _.uniq(array)
+    })
+    suite.add('[array-uniq] | ', function () {
+        arrayUniq(array)
     })
     suite.add('[linq] distinct  | ', function () {
         linq.from(array).distinct().toArray()
