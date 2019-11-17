@@ -14,7 +14,7 @@
     "array-uniq": "2.1.0",
     "benchmark": "2.1.4",
     "core-js": "^2.6.10",
-    "declarative-js": "3.8.5",
+    "declarative-js": "3.8.6",
     "linq": "3.2.0",
     "lodash": "4.17.15",
     "uuid": "3.3.2"

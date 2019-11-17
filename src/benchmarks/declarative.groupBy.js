@@ -16,7 +16,7 @@ let benchmark = (filename) => {
         array.push({ index, id, luckyNumber })
     }
 
-    let logger = new Logger('Reduer.groupBy', 100000, array[0], filename)
+    let logger = new Logger('Reducer.groupBy', 100000, array[0], filename)
     suite.add('[lodash] _.groupBy | ', function () {
         _.groupBy(array, 'luckyNumber');
     })

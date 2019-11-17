@@ -16,12 +16,16 @@ function writeTableStart() {
     });
 }
 
-function Logger(header, n, example, filename) {
+function Logger(header, n, example, filename, description = "") {
     this.events = []
     writeLn('## ' + header);
     writeLn();
-    writeLn(`Benckmark file [_${filename}_](${filename})`);
+    writeLn(`Benchmark file [_${filename}_](${filename})`);
     writeLn();
+    if (description) {
+        writeLn(description);
+        writeLn();
+    }
     writeLn('Test data with `' + n + '` instances');
     writeLn();
     writeLn('Instance example: \n```javascript\n' + JSON.stringify(example, null, 2) + '\n```');

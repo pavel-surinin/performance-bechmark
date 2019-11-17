@@ -1,13 +1,13 @@
 
 ## Versions: 
  - node.js: _10.15.3_ 
- - declarative-js: _3.8.5_
+ - declarative-js: _3.8.6_
  - lodash: _4.17.15_
  - linq: _3.2.0_
 
-## Reduer.groupBy
+## Reducer.groupBy
 
-Benckmark file [_https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.groupBy.js_](https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.groupBy.js)
+Benchmark file [_https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.groupBy.js_](https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.groupBy.js)
 
 Test data with `100000` instances
 
@@ -15,41 +15,100 @@ Instance example:
 ```javascript
 {
   "index": 0,
-  "id": "9bfff3fa-e924-4eb4-b8fb-13a1933529e5",
-  "luckyNumber": "48id"
+  "id": "3b5e2bea-f235-4430-8c53-c68c6ea35f58",
+  "luckyNumber": "1id"
 }
 ```
 
 | Rank | Function | Result |  |
 |---|---|---|---|
-1 | [lodash] _.groupBy |  x 145 ops/sec ±2.76% (73 runs sampled) | ~ 7ms/op
-2 | [snippet] reduce |  x 138 ops/sec ±3.17% (69 runs sampled) | ~ 7ms/op
-3 | [**declarative-js**] Reducer.groupBy |  x 135 ops/sec ±5.04% (62 runs sampled) | ~ 7ms/op
-4 | [linq] groupBy |  x 79.13 ops/sec ±2.42% (67 runs sampled) | ~ 13ms/op
+1 | [**declarative-js**] Reducer.groupBy |  x 253 ops/sec ±0.65% (84 runs sampled) | ~ 4ms/op
+2 | [snippet] reduce |  x 213 ops/sec ±0.34% (83 runs sampled) | ~ 5ms/op
+3 | [lodash] _.groupBy |  x 178 ops/sec ±2.37% (77 runs sampled) | ~ 6ms/op
+4 | [linq] groupBy |  x 115 ops/sec ±1.88% (74 runs sampled) | ~ 9ms/op
+## Reducer.partitionBy[callback]
+
+Benchmark file [_https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.parttionBy.js_](https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.parttionBy.js)
+
+Partitions array to be even or odd by callback function `x => x % 2 === 0`
+
+Test data with `100000` instances
+
+Instance example: 
+```javascript
+46
+```
+
+| Rank | Function | Result |  |
+|---|---|---|---|
+1 | [lodash] _.partition|  x 408 ops/sec ±0.39% (89 runs sampled) | ~ 2ms/op
+2 | [**declarative-js**] Reducer.partitionBy |  x 342 ops/sec ±0.45% (90 runs sampled) | ~ 3ms/op
+3 | [linq] partitionBy  |  x 35.11 ops/sec ±3.01% (48 runs sampled) | ~ 28ms/op
+## Reducer.partitionBy[key]
+
+Benchmark file [_https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.parttionByKey.js_](https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.parttionByKey.js)
+
+Partitions array to be separated by objects key `isEven`
+
+Test data with `100000` instances
+
+Instance example: 
+```javascript
+{
+  "luckyNumber": 49,
+  "isEven": false
+}
+```
+
+| Rank | Function | Result |  |
+|---|---|---|---|
+1 | [**declarative-js**] Reducer.partitionBy |  x 365 ops/sec ±1.40% (88 runs sampled) | ~ 3ms/op
+2 | [lodash] _.partition|  x 163 ops/sec ±0.44% (83 runs sampled) | ~ 6ms/op
+## Reducer.partitionBy[object]
+
+Benchmark file [_https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.parttionByObject.js_](https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.parttionByObject.js)
+
+Partitions array by object values  `{name: "Bart", age: 8}`
+
+Test data with `100000` instances
+
+Instance example: 
+```javascript
+{
+  "age": 9,
+  "name": "Barney",
+  "double": 18
+}
+```
+
+| Rank | Function | Result |  |
+|---|---|---|---|
+1 | [**declarative-js**] Reducer.partitionBy |  x 167 ops/sec ±2.86% (77 runs sampled) | ~ 6ms/op
+2 | [lodash] _.partition|  x 136 ops/sec ±2.21% (77 runs sampled) | ~ 7ms/op
 ## Sort.ascendingBy
 
-Benckmark file [_https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.sort.js_](https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.sort.js)
+Benchmark file [_https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.sort.js_](https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.sort.js)
 
 Test data with `10000` instances
 
 Instance example: 
 ```javascript
 {
-  "luckyNumber": 20,
-  "age": 53
+  "luckyNumber": 82,
+  "age": 77
 }
 ```
 
 | Rank | Function | Result |  |
 |---|---|---|---|
-1 | [**declarative-js**] Sort.ascendingBy /getter/ |  x 144 ops/sec ±5.18% (57 runs sampled) | ~ 7ms/op
-2 | [**declarative-js**] Sort.ascendingBy /key/ |  x 127 ops/sec ±3.24% (59 runs sampled) | ~ 8ms/op
-3 | [linq] orderBy  |  x 96.14 ops/sec ±3.82% (60 runs sampled) | ~ 10ms/op
-4 | [lodash] _.sortBy  /key/ |  x 87.47 ops/sec ±3.39% (59 runs sampled) | ~ 11ms/op
-5 | [lodash] _.sortBy /getter/ |  x 86.85 ops/sec ±5.01% (55 runs sampled) | ~ 12ms/op
+1 | [**declarative-js**] Sort.ascendingBy /getter/ |  x 368 ops/sec ±3.22% (81 runs sampled) | ~ 3ms/op
+2 | [**declarative-js**] Sort.ascendingBy /key/ |  x 313 ops/sec ±1.20% (87 runs sampled) | ~ 3ms/op
+3 | [linq] orderBy  |  x 236 ops/sec ±1.15% (85 runs sampled) | ~ 4ms/op
+4 | [lodash] _.sortBy /getter/ |  x 215 ops/sec ±1.64% (84 runs sampled) | ~ 5ms/op
+5 | [lodash] _.sortBy  /key/ |  x 211 ops/sec ±1.75% (82 runs sampled) | ~ 5ms/op
 ## Reducer.toObject
 
-Benckmark file [_https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.toObject.js_](https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.toObject.js)
+Benchmark file [_https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.toObject.js_](https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.toObject.js)
 
 Test data with `100000` instances
 
@@ -57,31 +116,31 @@ Instance example:
 ```javascript
 {
   "index": 0,
-  "id": "e9dc134d-c620-4884-8496-e8d2fd36d20e",
-  "luckyNumber": 61
+  "id": "b09d7b4b-60e1-4ab0-97a6-d1b41ab6f93c",
+  "luckyNumber": 14
 }
 ```
 
 | Rank | Function | Result |  |
 |---|---|---|---|
-1 | [snippet] for |  x 19.76 ops/sec ±6.93% (37 runs sampled) | ~ 51ms/op
-2 | [snippet] reduce |  x 19.02 ops/sec ±5.43% (35 runs sampled) | ~ 53ms/op
-3 | [**declarative-js**] Reducer.toMap |  x 18.65 ops/sec ±5.45% (33 runs sampled) | ~ 54ms/op
-4 | [linq] toObject |  x 17.88 ops/sec ±4.99% (33 runs sampled) | ~ 56ms/op
-5 | [**declarative-js**] Reducer.toObject  |  x 17.84 ops/sec ±4.87% (33 runs sampled) | ~ 56ms/op
-6 | [lodash] _.keyBy |  x 16.86 ops/sec ±7.15% (33 runs sampled) | ~ 59ms/op
+1 | [snippet] for |  x 41.81 ops/sec ±3.62% (55 runs sampled) | ~ 24ms/op
+2 | [snippet] reduce |  x 40.06 ops/sec ±3.63% (53 runs sampled) | ~ 25ms/op
+3 | [**declarative-js**] Reducer.toMap |  x 37.65 ops/sec ±3.53% (50 runs sampled) | ~ 27ms/op
+4 | [**declarative-js**] Reducer.toObject  |  x 37.59 ops/sec ±3.24% (50 runs sampled) | ~ 27ms/op
+5 | [lodash] _.keyBy |  x 37.25 ops/sec ±3.37% (50 runs sampled) | ~ 27ms/op
+6 | [linq] toObject |  x 36.88 ops/sec ±3.47% (49 runs sampled) | ~ 27ms/op
 ## toBe.unique (object content)
 
-Benckmark file [_https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.unique.deepObject.js_](https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.unique.deepObject.js)
+Benchmark file [_https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.unique.deepObject.js_](https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.unique.deepObject.js)
 
 Test data with `10000` instances
 
 Instance example: 
 ```javascript
 {
-  "luckyNumber": "6id",
+  "luckyNumber": "15id",
   "index": 0,
-  "random": "6id1",
+  "random": "15id1",
   "a": "a",
   "b": "b",
   "c": "c"
@@ -90,29 +149,29 @@ Instance example:
 
 | Rank | Function | Result |  |
 |---|---|---|---|
-1 | [native] new Set() |  x 35.05 ops/sec ±1.56% (59 runs sampled) | ~ 29ms/op
-2 | [**declarative-js**] toBe.unique |  x 33.65 ops/sec ±3.70% (47 runs sampled) | ~ 30ms/op
+1 | [native] new Set() |  x 81.10 ops/sec ±1.27% (70 runs sampled) | ~ 12ms/op
+2 | [**declarative-js**] toBe.unique |  x 79.99 ops/sec ±0.58% (69 runs sampled) | ~ 13ms/op
 ## toBe.unique
 
-Benckmark file [_https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.unique.js_](https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.unique.js)
+Benchmark file [_https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.unique.js_](https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.unique.js)
 
 Test data with `1000000` instances
 
 Instance example: 
 ```javascript
-"62id"
+"83id"
 ```
 
 | Rank | Function | Result |  |
 |---|---|---|---|
-1 | [lodash] _.uniq  |  x 10.93 ops/sec ±3.95% (30 runs sampled) | ~ 91ms/op
-2 | [native] new Set() |  x 10.84 ops/sec ±4.77% (31 runs sampled) | ~ 92ms/op
-3 | [array-uniq] |  x 10.59 ops/sec ±4.28% (30 runs sampled) | ~ 94ms/op
-4 | [**declarative-js**] toBe.unique |  x 10.41 ops/sec ±3.00% (29 runs sampled) | ~ 96ms/op
-5 | [linq] distinct  |  x 8.39 ops/sec ±3.07% (25 runs sampled) | ~ 119ms/op
+1 | [lodash] _.uniq  |  x 28.83 ops/sec ±1.03% (51 runs sampled) | ~ 35ms/op
+2 | [native] new Set() |  x 28.12 ops/sec ±1.01% (50 runs sampled) | ~ 36ms/op
+3 | [array-uniq] |  x 27.54 ops/sec ±2.82% (50 runs sampled) | ~ 36ms/op
+4 | [**declarative-js**] toBe.unique |  x 25.01 ops/sec ±0.32% (45 runs sampled) | ~ 40ms/op
+5 | [linq] distinct  |  x 18.30 ops/sec ±4.00% (37 runs sampled) | ~ 55ms/op
 ## toBe.uniqueBy
 
-Benckmark file [_https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.uniqueBy.js_](https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.uniqueBy.js)
+Benchmark file [_https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.uniqueBy.js_](https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.uniqueBy.js)
 
 Test data with `1000000` instances
 
@@ -125,5 +184,23 @@ Instance example:
 
 | Rank | Function | Result |  |
 |---|---|---|---|
-1 | [**declarative-js**] toBe.uniqueBy |  x 17.69 ops/sec ±9.03% (35 runs sampled) | ~ 57ms/op
-2 | [lodash] _.uniqBy  |  x 13.01 ops/sec ±3.69% (33 runs sampled) | ~ 77ms/op
+1 | [**declarative-js**] toBe.uniqueBy |  x 40.51 ops/sec ±3.29% (53 runs sampled) | ~ 25ms/op
+2 | [lodash] _.uniqBy  |  x 31.56 ops/sec ±0.71% (56 runs sampled) | ~ 32ms/op
+## Reducer.zip
+
+Benchmark file [_https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.zip.js_](https://github.com/pavel-surinin/performance-bechmark/tree/master/src/benchmarks/declarative.zip.js)
+
+Zips array with shallow copy of origin array
+
+Test data with `100000` instances
+
+Instance example: 
+```javascript
+"29id"
+```
+
+| Rank | Function | Result |  |
+|---|---|---|---|
+1 | [**declarative-js**] Reducer.zip |  x 117 ops/sec ±9.54% (51 runs sampled) | ~ 9ms/op
+2 | [lodash] _.zip  |  x 55.80 ops/sec ±11.85% (49 runs sampled) | ~ 18ms/op
+3 | [linq] zip  | :  | ~ Infinityms/op
