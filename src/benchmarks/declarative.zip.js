@@ -3,7 +3,6 @@ var suite = new Benchmark.Suite;
 var djs = require('declarative-js')
 var _ = require('lodash')
 var Reducer = djs.Reducer
-var linq = require('linq')
 var Logger = require('../_output').Logger
 
 
@@ -32,9 +31,6 @@ let benchmark = (filename) => {
     })
     suite.add('[lodash] _.zip  | ', function () {
         _.zip(array, array.concat())
-    })
-    suite.add('[linq] zip  | ', function () {
-        linq.from(array).zip(array.concat()).toArray()
     })
         .on('cycle', (e) => logger.addEvent(e))
         .on('complete', () => logger.writeResults())
