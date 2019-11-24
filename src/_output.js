@@ -11,7 +11,7 @@ function writeLn(text = '') {
 }
 
 function writeTableStart() {
-    fs.appendFileSync(OUTPUT_FILE_NAME, "| Rank | Function | Result |  |\n|---|---|---|---|\n", function (err) {
+    fs.appendFileSync(OUTPUT_FILE_NAME, "| Rank | Function | Result |  |  | \n|---|---|---|---|---|\n", function (err) {
         if (err) throw err;
     });
 }
@@ -45,7 +45,7 @@ Logger.prototype.writeResults = function writeResults() {
             let description = String(e.event.target)
                 .split("declarative-js")
                 .join("**declarative-js**")
-            return writeLn(`${index + 1} | ${description} | ~ ${Math.round(1000 / e.event.target.hz)}ms/op`);
+            return writeLn(`${index + 1} | ${description} | ~ ${Math.round(1000 / e.event.target.hz)}ms/op | ${Math.round((e.event.target.hz / this.events[0].event.target.hz) * 100)} %`);
         })
 }
 

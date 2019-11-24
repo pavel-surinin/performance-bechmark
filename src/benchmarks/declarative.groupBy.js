@@ -7,6 +7,8 @@ var groupBy = djs.Reducer.groupBy
 var Map = djs.Reducer.Map
 var linq = require('linq')
 var Logger = require('../_output').Logger
+var L = require('list')
+var R = require('ramda')
 
 let benchmark = (filename) => {
     let array = []
@@ -15,16 +17,32 @@ let benchmark = (filename) => {
         let luckyNumber = Math.round(Math.random() * 100) + 'id'
         array.push({ index, id, luckyNumber })
     }
+    var list = L.from(array)
+    var lq = linq.from(array)
 
     let logger = new Logger('Reducer.groupBy', 100000, array[0], filename)
-    suite.add('[lodash] _.groupBy | ', function () {
+
+    suite.add('[lodash] _.groupBy /key/ | ', function () {
         _.groupBy(array, 'luckyNumber');
     })
+
+    suite.add('[ramda] groupBy | ', function () {
+        R.groupBy(x => x.luckyNumber, array)
+    })
+
+    suite.add('[lodash] _.groupBy /function/ | ', function () {
+        _.groupBy(array, x => x.luckyNumber);
+    })
+
+    suite.add('[list] groupWith | ', function () {
+        L.groupWith((a, b) => a.luckyNumber == b.luckyNumber, list)
+    })
+
     suite.add('[linq] groupBy | ', function () {
-        linq.from(array)
-            .groupBy(x => x.luckyNumber)
+        lq.groupBy(x => x.luckyNumber)
             .toObject(x => x)
     })
+
     suite.add('[snippet] reduce | ', function () {
         array.reduce(function (acc, obj) {
             var key = obj["luckyNumber"];
@@ -35,9 +53,14 @@ let benchmark = (filename) => {
             return acc;
         }, {})
     })
-    suite.add('[declarative-js] Reducer.groupBy | ', function () {
+
+    suite.add('[declarative-js] Reducer.groupBy /key/ | ', function () {
         array.reduce(groupBy('luckyNumber'), Map())
     })
+    suite.add('[declarative-js] Reducer.groupBy /function/ | ', function () {
+        array.reduce(groupBy(x => x.luckyNumber), Map())
+    })
+
         .on('cycle', function (event) {
             logger.addEvent(event);
         })

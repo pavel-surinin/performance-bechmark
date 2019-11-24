@@ -4,20 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "generate": "node src/generator.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "alasql": "0.5.1",
     "array-uniq": "2.1.0",
     "benchmark": "2.1.4",
-    "alasql": "0.5.1",
     "core-js": "^2.6.10",
     "declarative-js": "3.8.8",
     "linq": "3.2.0",
+    "list": "2.0.19",
     "lodash": "4.17.15",
+    "ramda": "0.26.1",
     "uuid": "3.3.2"
   }
 }

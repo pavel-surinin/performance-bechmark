@@ -4,6 +4,9 @@ var djs = require('declarative-js')
 var _ = require('lodash')
 var Reducer = djs.Reducer
 var linq = require('linq')
+var L = require('list')
+var R = require('ramda')
+
 var Logger = require('../_output').Logger
 
 
@@ -19,6 +22,8 @@ let benchmark = (filename) => {
 
     let n = 100000
     let array = createArray(n)
+    var list = L.from(array)
+    var lq = linq.from(array)
     let logger = new Logger(
         'Reducer.partitionBy[callback]',
         n,
@@ -26,15 +31,20 @@ let benchmark = (filename) => {
         filename,
         'Partitions array to be even or odd by callback function `x => x % 2 === 0`'
     )
-
+    suite.add('[lodash] _.partition | ', function () {
+        _.partition(array, x => x % 2 === 0)
+    })
+    suite.add('[ramda] partition | ', function () {
+        R.partition(x => x % 2 === 0, array)
+    })
+    suite.add('[list] partition | ', function () {
+        L.partition(x => x % 2 === 0, list)
+    })
     suite.add('[declarative-js] Reducer.partitionBy | ', function () {
         array.reduce(Reducer.partitionBy(x => x % 2 === 0), [[], []])
     })
-    suite.add('[lodash] _.partition| ', function () {
-        _.partition(array, x => x % 2 === 0)
-    })
-    suite.add('[linq] partitionBy  | ', function () {
-        linq.from(array).partitionBy(x => x % 2 === 0).toArray()
+    suite.add('[linq] partitionBy | ', function () {
+        lq.partitionBy(x => x % 2 === 0).toArray()
     })
         .on('cycle', (e) => logger.addEvent(e))
         .on('complete', () => logger.writeResults())

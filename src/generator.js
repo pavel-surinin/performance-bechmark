@@ -8,6 +8,8 @@ let header = `
  - declarative-js: _${packagejson.dependencies['declarative-js']}_
  - lodash: _${packagejson.dependencies['lodash']}_
  - linq: _${packagejson.dependencies['linq']}_
+ - list: _${packagejson.dependencies['list']}_
+ - ramda: _${packagejson.dependencies['ramda']}_
 
 `
 
